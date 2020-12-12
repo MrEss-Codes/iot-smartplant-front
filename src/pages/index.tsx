@@ -1,36 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import { Router, Switch, Route, } from "react-router-dom";
-import Link from "next/link";
-
-
-
 import "bootstrap/dist/css/bootstrap.min.css";
-//import "./Index.css";
 
-import login from "./Login";
-import register from "./Register";
-import dashboard from "./Dashboard";
+import Login from "./login";
+import Register from "./register";
+import Dashboard from "./dashboard";
 
-
+//History is used for maintaining state, ie keeping the token with us when we redirect to the dashboard.
 import { history } from "../helpers/history";
 
 const Index = () => {
-
     return (
         <Router history={history}>
                 <div className="container mt-3">
                     <Switch>
-                        <Route exact path={["/", "/login"]} component={login} />
-                        <Route exact path="/dashboard" component={dashboard} />
-                        <Route exact path="/register" component={register} />
+                        <Route exact path={["/", "/login"]} component={Login} />
+                        <Route exact path="/dashboard" component={Dashboard} />
+                        <Route exact path="/register" component={Register} />
                     </Switch>
                 </div>
         </Router>
     );
 };
-
-
-
 
 export default Index;
