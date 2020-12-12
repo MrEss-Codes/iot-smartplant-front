@@ -3,7 +3,7 @@ import { Router, Switch, Route, } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Login from "./login";
-import Register from "./register";
+import Register from "../components/Register/register";
 import Dashboard from "./dashboard";
 
 //History is used for maintaining state, ie keeping the token with us when we redirect to the dashboard.
@@ -16,7 +16,7 @@ const Index = () => {
                     <Switch>
                         <Route exact path={["/", "/login"]} component={Login} />
                         <Route exact path="/dashboard" component={Dashboard} />
-                        <Route exact path="/register" component={Register} />
+                        <Route path="/register" component={Register} />
                     </Switch>
                 </div>
         </Router>
