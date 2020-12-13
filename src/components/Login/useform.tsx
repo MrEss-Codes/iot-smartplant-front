@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import {login} from "../../state/actions/auth";
 
-const useForm = () => {
+const useForm = (callback) => {
 
     const [values, setValues] = useState({
         email: undefined,
