@@ -3,10 +3,14 @@ import Form from '../components/Login/login';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
-const Login = () => {
+const Login = ({query}) => {
     return (
-        <Form />
+        <Form query={query}/>
     );
 };
+
+Login.getInitialProps = ({query}) => {
+    return {query}
+}
 
 export default Login;

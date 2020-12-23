@@ -1,28 +1,27 @@
-import React from "react";
-import useSelector from "react-redux";
-import Redirect from 'react-router-dom';
+import React, {useState} from "react";
+import {useSelector} from "react-redux";
+import {Redirect} from 'react-router-dom';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import {login} from "../../state/actions/auth";
 import useForm from "./useform";
 
-
-
-
-const Login = () => {
+const Login = ({query}) => {
     const {
         values,
         handleChange,
         handleLogin,
-        required
+        required,
+        getUrlParameter,
     } = useForm(login);
 
     const { isLoggedIn } = useSelector(state => state.auth);
     const { message } = useSelector(state => state.message);
 
-
     if (isLoggedIn) {
-        return <Redirect to="/Dashboard" />;
+            const id = getUrlParameter('id')
+            console.log('redirected with query ' + id)
+            return <Redirect to={"/dashboard"} />;
     }
 
     return (
@@ -64,7 +63,9 @@ const Login = () => {
     );
 };
 
-
+Login.getInitialProps = ({query}) => {
+    return {query}
+}
 
 export default Login;
 

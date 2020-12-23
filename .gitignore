@@ -21,3 +21,13 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.next/static/webpack/pages/index.aeded305b30d00e4b6da.hot-update.js
+.next/static/webpack/aeded305b30d00e4b6da.hot-update.json
+.next/static/webpack/157a597749caf5eb1142.hot-update.json
+.next/static/chunks/webpack.js
+.next/static/chunks/pages/next/dist/pages/_error.js
+.next/static/chunks/pages/index.js
+.next/static/chunks/pages/_app.js
+.next/server/pages/next/dist/pages/_error.js
+.next/server/pages/index.js
+.next/server/pages/_app.js

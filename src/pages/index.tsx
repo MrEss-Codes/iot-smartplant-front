@@ -1,9 +1,8 @@
 import React from "react";
 import { Router, Switch, Route, } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import Login from "./login";
-import Register from "../components/Register/register";
+import Register from "./register";
 import Dashboard from "./dashboard";
 
 //History is used for maintaining state, ie keeping the token with us when we redirect to the dashboard.

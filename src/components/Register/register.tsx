@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import { isEmail } from "validator";
 import { register } from "../../state/actions/auth";
-import {useRouter} from "next/router";
 import "bootstrap/dist/css/bootstrap.min.css";
+import {useRouter} from "next/router";
 
 
 const required = (value) => {
@@ -30,7 +29,7 @@ const validEmail = (value) => {
 };
 
 
-const Register = ({query}) => {
+const Register = ({query}, props) => {
 
 
     const [email, setEmail] = useState("");
@@ -44,6 +43,8 @@ const Register = ({query}) => {
 
 
     const dispatch = useDispatch();
+    const router = useRouter();
+
 
     const onChangeEmail = (e) => {
         const email = e.target.value;
@@ -70,6 +71,10 @@ const Register = ({query}) => {
             );
         }
     };
+    const onClickExistingUser = () => {
+        console.log("redirect to login with id: " + query.id)
+        return router.push('/?id=' + query.id)
+    };
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -82,6 +87,8 @@ const Register = ({query}) => {
         dispatch(register(email, password, id))
             .then(() => {
                 setSuccessful(true);
+                props.history.push("/login");
+                window.location.reload();
                 })
             .catch(() => {
                 setSuccessful(false);
@@ -141,6 +148,7 @@ const Register = ({query}) => {
                         </div>
                     )}
                 </Form>
+                <button className="btn" onClick={onClickExistingUser}>Already have an account?</button>
             </div>
         </div>
     );
