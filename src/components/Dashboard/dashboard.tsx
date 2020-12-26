@@ -2,8 +2,8 @@ import React, {useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {logout} from "../../state/actions/auth";
 import {Redirect} from 'react-router-dom';
-import Line from '../Charts/line';
 import useForm from "./useform";
+import PlantForm from "../Plant/plantform";
 
 const Dashboard = () => {
 
@@ -32,16 +32,12 @@ const Dashboard = () => {
                     <strong>{currentUser.email}</strong> Profile
                 </h3>
             </header>
-            <h3>List of your devices and relevant sensor information</h3>
-            <p>
-                <strong>Device ids:</strong> {currentUser.devices}
-            </p>
-            <h3>temperature</h3>
-            <Line/>
+            <PlantForm plantID={currentUser.devices}/>
             <button className="btn btn-primary btn-block" onClick={logOut}>
                 <span>Logout</span>
             </button>
         </div>
+
     );
 };
 
