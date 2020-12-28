@@ -5,29 +5,7 @@ import ChartLine from "../Charts/line"
 import mockdata from "./mockdata"
 
 
-
-const PlantForm = ({plantID}) => {
-
-    const [tempData, setTempData] = useState([{}]);
-    const [moistData, setMoistData] = useState([{}]);
-
-    const { plant } = useSelector(state => state.plant);
-
-    const dispatch = useDispatch();
-
-    //mock temp data
-    const{
-        temp,
-        moist
-    } = mockdata()
-
-    //put in mockdata
-    useEffect(() => {
-        setTempData(temp)
-        setMoistData(moist)
-    },[]);
-
-    /* To be used for updating data
+/* To be used for updating data
     useEffect(() => {
         dispatch(getplantdata())
             .then(() => {
@@ -37,13 +15,42 @@ const PlantForm = ({plantID}) => {
     }, []);
     */
 
+
+const PlantForm = ({plantID}) => {
+
+    const [tempData, setTempData] = useState([{}]);
+    const [soilHumidData, setSoilHumidData] = useState([{}]);
+    const [humidData, setHumidData] = useState([{}]);
+
+    const { plant } = useSelector(state => state.plant);
+
+    const dispatch = useDispatch();
+
+    //mock temp data
+    const{
+        temp,
+        soilHumidity,
+        humidity
+    } = mockdata()
+
+    //put in mockdata
+    useEffect(() => {
+        setTempData(temp)
+        setSoilHumidData(soilHumidity)
+        setHumidData(humidity)
+    },[]);
+
+
+
     return (
         <div>
             <h2>Device: {plantID}</h2>
             <h3>Temperature</h3>
             <ChartLine data={tempData}/>
-            <h3>Moisture</h3>
-            <ChartLine data={moistData}/>
+            <h3>Soil humidity</h3>
+            <ChartLine data={soilHumidData}/>
+            <h3>Humidity</h3>
+            <ChartLine data={humidData}/>
         </div>
     );
 };

@@ -37,7 +37,6 @@ const Dashboard = () => {
                 <span>Logout</span>
             </button>
         </div>
-
     );
 };
 

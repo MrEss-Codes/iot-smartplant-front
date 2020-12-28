@@ -20,7 +20,27 @@ const useForm = () => {
             "value": 17,
         },
     ];
-    const moist = [
+    const soilHumidity = [
+        {
+            "name": "12:00",
+            "value": 20,
+        },
+
+        {
+            "name": "12:01",
+            "value": 19,
+        },
+        {
+            "name": "12:02",
+            "value": 19,
+        },
+
+        {
+            "name": "12:03",
+            "value": 18,
+        },
+    ];
+    const humidity = [
         {
             "name": "12:00",
             "value": 20,
@@ -44,7 +64,9 @@ const useForm = () => {
 
     return {
         temp,
-        moist,
+        soilHumidity,
+        humidity
+
     }
 };
 
