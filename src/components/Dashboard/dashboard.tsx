@@ -11,10 +11,14 @@ const Dashboard = () => {
 
     const {
         currentUser,
-        getUrlParameter,
+        newDevceDetected
     } = useForm();
 
-    console.log('oi that id is ' + getUrlParameter('id'))
+    if(localStorage.getItem("newId") !== null && undefined){
+        var id = localStorage.getItem("newId")
+        newDevceDetected(id)
+    }
+
 
     const logOut = () => {
         dispatch(logout());

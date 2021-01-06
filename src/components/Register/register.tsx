@@ -1,99 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
-import { isEmail } from "validator";
-import { register } from "../../state/actions/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useRouter} from "next/router";
-
-
-const required = (value) => {
-    if (!value) {
-        return (
-            <div className="alert alert-danger" role="alert">
-                This field is required!
-            </div>
-        );
-    }
-};
-
-const validEmail = (value) => {
-    if (!isEmail(value)) {
-        return (
-            <div className="alert alert-danger" role="alert">
-                This is not a valid email.
-            </div>
-        );
-    }
-};
-
+import useForm from "./useForm";
 
 const Register = ({query}, props) => {
 
+    const{
+        values,
+        handleRegister,
+        handleChange,
+        successful,
+        required,
+        message,
+        validEmail,
+        vpassword,
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [password2, setPassword2] = useState("");
-    const [id] = useState(query.id);
-    const [successful, setSuccessful] = useState(false);
 
+    } = useForm(props)
 
-    const { message } = useSelector(state => state.message);
-
-
-    const dispatch = useDispatch();
     const router = useRouter();
 
-
-    const onChangeEmail = (e) => {
-        const email = e.target.value;
-        setEmail(email);
-    };
-
-    const onChangePassword = (e) => {
-        const password = e.target.value;
-        setPassword(password);
-    };
-    const onChangePassword2 = (e) => {
-        const password = e.target.value;
-        setPassword2(password);
-    };
-
-
-    const vpassword = (value) => {
-
-        if (value.length < 6 || value.length > 40) {
-            return (
-                <div className="alert alert-danger" role="alert">
-                    The password must be between 6 and 40 characters.
-                </div>
-            );
-        }
-    };
     const onClickExistingUser = () => {
         console.log("redirect to login with id: " + query.id)
         return router.push('/?id=' + query.id)
     };
-
-    const handleRegister = (e) => {
-        e.preventDefault();
-        setSuccessful(false);
-        if (password !== password2){
-            return (
-                alert('password does not match')
-            );
-        }
-        dispatch(register(email, password, id))
-            .then(() => {
-                setSuccessful(true);
-                props.history.push("/login");
-                window.location.reload();
-                })
-            .catch(() => {
-                setSuccessful(false);
-                });
-    };
+    
     return (
         <div className="col-md-12">
             <div className="card card-container">
@@ -106,8 +39,8 @@ const Register = ({query}, props) => {
                                     type="text"
                                     className="form-control"
                                     name="email"
-                                    value={email}
-                                    onChange={onChangeEmail}
+                                    value={values.email}
+                                    onChange={handleChange}
                                     validations={[required, validEmail]}
                                 />
                             </div>
@@ -117,8 +50,8 @@ const Register = ({query}, props) => {
                                     type="password"
                                     className="form-control"
                                     name="password"
-                                    value={password}
-                                    onChange={onChangePassword}
+                                    value={values.password}
+                                    onChange={handleChange}
                                     validations={[required, vpassword]}
                                 />
                             </div>
@@ -128,8 +61,8 @@ const Register = ({query}, props) => {
                                     type="password"
                                     className="form-control"
                                     name="password2"
-                                    value={password2}
-                                    onChange={onChangePassword2}
+                                    value={values.password2}
+                                    onChange={handleChange}
                                     validations={[required, vpassword]}
                                 />
                             </div>
