@@ -1,24 +1,34 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {
     Line,
     LineChart,
     XAxis,
     YAxis,
+    Tooltip,
+
+
 } from 'recharts';
 
 
-const ChartLine = ({data}) => {
+const ChartLine = ({data, string, valuename}) => {
+    const [typeOfChart] = useState(string);
+    const [dName, setDName] = useState("time");
+    const [dValue, setDValue] = useState("value");
 
-    console.log(data)
+
+   useEffect(() => {
+     setDValue(valuename)
+  }, []);
 
     return (
         <div>
-            <h1></h1>
+            <h3>{typeOfChart}</h3>
             <LineChart width={500} height={300} data={data}>
-                <XAxis dataKey="name" />
+                <XAxis dataKey={dName} />
+                <Tooltip />
                 <YAxis />
-                <Line dataKey="value" />
+                <Line dataKey={dValue} />
             </LineChart>
         </div>
     );
