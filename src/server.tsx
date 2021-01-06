@@ -22,3 +22,5 @@ app.prepare()
         console.error(ex.stack)
         process.exit(1)
     })
+
+export {}
