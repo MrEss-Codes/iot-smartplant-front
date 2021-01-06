@@ -20,7 +20,8 @@ const Login = ({query}) => {
 
     if (isLoggedIn) {
             const id = getUrlParameter('id')
-            console.log('redirected with query ' + id)
+            console.log('redirected and saved to local storage ' + id)
+            localStorage.setItem("new id", id)
             return <Redirect to={"/dashboard"} />;
     }
 
