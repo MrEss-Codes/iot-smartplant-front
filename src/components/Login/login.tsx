@@ -20,7 +20,7 @@ const Login = ({query}) => {
 
     if (isLoggedIn) {
             const id = getUrlParameter('id')
-            return <Redirect to={"/dashboard?id=" + id} />;
+            return <Redirect to={"/dashboard"} />;
     }
 
     return (
