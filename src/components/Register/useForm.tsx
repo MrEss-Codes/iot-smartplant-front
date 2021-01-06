@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import {register} from "../../state/actions/auth";
 import { isEmail } from "validator";
+import {useRouter} from "next/router";
 
 const useForm = (props) => {
 
@@ -19,6 +20,8 @@ const useForm = (props) => {
 
     const dispatch = useDispatch();
 
+    const router = useRouter();
+
     const handleChange = (event) => {
         event.persist();
         setValues(values => ({ ...values, [event.target.name]: event.target.value }));
@@ -34,6 +37,10 @@ const useForm = (props) => {
         }
     };
 
+    const redirecttologin = () => {
+        router.push('/')
+    }
+
     const handleRegister = (e) => {
         e.preventDefault();
         setSuccessful(false);
@@ -45,8 +52,7 @@ const useForm = (props) => {
         dispatch(register(values.email, values.password, id))
             .then(() => {
                 setSuccessful(true);
-                props.history.push("/login");
-                window.location.reload();
+                redirecttologin();
             })
             .catch(() => {
                 setSuccessful(false);

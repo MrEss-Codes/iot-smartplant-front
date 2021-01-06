@@ -16,9 +16,6 @@ const useForm = (callback) => {
         dispatch(login(values.email, values.password))
             .then(() => {
 
-                const id = getUrlParameter('id')
-                localStorage.setItem("newId", id)
-
                 props.history.push("/Dashboard");
                 window.location.reload();
             })
