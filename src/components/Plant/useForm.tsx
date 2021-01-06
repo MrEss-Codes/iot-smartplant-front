@@ -7,7 +7,7 @@ const useForm = (plantID) => {
     const [soilHumidData, setSoilHumidData] = useState([{}]);
     const [humidData, setHumidData] = useState([{}]);
     const [plantOnOff, setPlantOnOff] = useState("True");
-    const [buttonplantactive, setPlantactive] = useState("Turn plant on");
+    const [buttonplantactive, setPlantactive] = useState("Turn on");
     const [bttnPlantData, setBttnPlantData] = useState("Get plant data");
     const [errMsg,setErrMsg ] = useState("");
 
@@ -88,7 +88,7 @@ const useForm = (plantID) => {
                 console.error(err.message);
             }
             setPlantOnOff("False")
-            setPlantactive("Turn plant off")
+            setPlantactive("Turn Off")
         }
         else{
             try {
@@ -98,7 +98,7 @@ const useForm = (plantID) => {
                 console.error(err.message);
             }
             setPlantOnOff("True")
-            setPlantactive("Turn plant on")
+            setPlantactive("Turn on")
         }
     };
 

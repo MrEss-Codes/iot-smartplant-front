@@ -21,7 +21,7 @@ const PlantForm = ({plantID}) => {
     return (
         <div>
             <h2>Device: {plantID}</h2>
-            <p>How to: Click plant on button and then click get plant data.</p>
+            <p>How to: Turn on/off automatic watering. Get/refresh plant data to get data</p>
             <button className="btn btn-primary btn-block" onClick={onClickplantONOFF}>
                 <span>{buttonplantactive}</span>
             </button>
