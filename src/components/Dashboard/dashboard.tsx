@@ -11,12 +11,12 @@ const Dashboard = () => {
 
     const {
         currentUser,
-        newDevceDetected
+        newDeviceDetected
     } = useForm();
 
-    if(localStorage.getItem("newId") !== null && undefined){
-        var id = localStorage.getItem("newId")
-        newDevceDetected(id)
+    if(localStorage.getItem("newid") !== null || undefined){
+        var id = localStorage.getItem("newid")
+        newDeviceDetected(id)
     }
 
 

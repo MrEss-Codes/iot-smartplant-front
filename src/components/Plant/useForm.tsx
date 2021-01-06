@@ -7,7 +7,7 @@ const useForm = (plantID) => {
     const [soilHumidData, setSoilHumidData] = useState([{}]);
     const [humidData, setHumidData] = useState([{}]);
     const [plantOnOff, setPlantOnOff] = useState("True");
-    const [buttonplantactive, setPlantactive] = useState("Turn plant on");
+    const [bttnplantactive, setPlantactive] = useState("Turn plant on");
     const [bttnPlantData, setBttnPlantData] = useState("Get plant data");
     const [errMsg,setErrMsg ] = useState("");
 
@@ -27,6 +27,35 @@ const useForm = (plantID) => {
         }
     };
 
+    const dataformatter = (data, n) => {
+        // create lists
+        const humidlist = [{}];
+        const shumidlist = [{}]
+        const tempClist = [{}]
+        // remove the empty object...
+        tempClist.pop();
+        humidlist.pop();
+        shumidlist.pop();
+        // format data for the charts
+        for (let i = n; i < data.length; i++) {
+            const plo = data[i]
+            let date = new Date(plo.timeStamp)
+            //for humidity
+            const humid = {time:date.toLocaleTimeString(),Humidity:plo.humidity}
+            humidlist.push(humid)
+            //for soil humidity
+            const shumid = {time:date.toLocaleTimeString(), SoilHumidity:plo.soilHumidity}
+            shumidlist.push(shumid)
+            //for tempC
+            const temp = {time:date.toLocaleTimeString(), Temperature:plo.temperatureC}
+            tempClist.push(temp)
+        }
+        // set data
+        setHumidData(humidlist)
+        setSoilHumidData(shumidlist)
+        setTempData(tempClist)
+    };
+
     //get and format data so we can use it with charts.
     const HandlePlantData = async () => {
         clearerr()
@@ -34,36 +63,16 @@ const useForm = (plantID) => {
         GetPlantData().then((data) => {
             // @ts-ignore
             const pldata = data.data
-            console.log("2. plant data received. first object is")
-            const humidlist = [{}]
-            const shumidlist = [{}]
-            const tempClist = [{}]
-            let n = 0
-            for (let i = 0; i < pldata.length; i++) {
-                const plo = pldata[i]
-                let date = new Date(plo.timeStamp)
-                //for humidity
-                const humid = {time:date.toLocaleTimeString(),Humidity:plo.humidity}
-                humidlist.push(humid)
-                //for soil humidity
-                const shumid = {time:date.toLocaleTimeString(), SoilHumidity:plo.soilHumidity}
-                shumidlist.push(shumid)
-                //for tempC
-                const temp = {time:date.toLocaleTimeString(), Temperature:plo.temperatureC}
-                tempClist.push(temp)
-                n = i
-                if (n == 10) {
-                    setHumidData(humidlist)
-                    setSoilHumidData(shumidlist)
-                    setTempData(tempClist)
-                    setBttnPlantData("Refresh plant data")
-                    console.log("3.sending data to charts")
-                    return;
-                }
+
+            console.log("2. plant data received. lenght of pldata: " + pldata.length)
+            if(pldata.length > 10) {
+                let n = pldata.length - 10
+                dataformatter(pldata, n)
             }
-            setHumidData(humidlist)
-            setSoilHumidData(shumidlist)
-            setTempData(tempClist)
+            else {
+                let n = 0
+                dataformatter(pldata, n)
+            }
             setBttnPlantData("Refresh plant data")
             console.log("3.sending data to charts")
         })
@@ -106,7 +115,7 @@ const useForm = (plantID) => {
       tempData,
       soilHumidData,
       humidData,
-      buttonplantactive,
+      bttnplantactive,
       bttnPlantData,
         errMsg,
     }

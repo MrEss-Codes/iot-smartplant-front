@@ -8,7 +8,7 @@ import useForm from "./useForm"
 const PlantForm = ({plantID}) => {
    //get functions from the useForm
     const{
-        buttonplantactive,
+        bttnplantactive,
         bttnPlantData,
         tempData,
         humidData,
@@ -23,7 +23,7 @@ const PlantForm = ({plantID}) => {
             <h2>Device: {plantID}</h2>
             <p>How to: Click plant on button and then click get plant data.</p>
             <button className="btn btn-primary btn-block" onClick={onClickplantONOFF}>
-                <span>{buttonplantactive}</span>
+                <span>{bttnplantactive}</span>
             </button>
             <button className="btn btn-primary btn-block" onClick={HandlePlantData}>
                 <span>{bttnPlantData}</span>
