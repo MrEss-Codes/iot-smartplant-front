@@ -17,7 +17,7 @@ const useForm = (plantID) => {
     const GetPlantData = async () => {
 
         try {
-            const plantData = await axios.get(baseURL + "plant/1", {})
+            const plantData = await axios.get(baseURL + "plant/" + plantID, {})
 
             return plantData;
 
