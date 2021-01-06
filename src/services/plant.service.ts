@@ -10,7 +10,7 @@ const GetPlantData = () => {
         .get(baseURL + "plant/QueryData", {})
 
         .then((response) => {
-            localStorage.setItem("plant", JSON.stringify(response.data));
+            console.log(response.data)
             return response.data;
         });
 };
