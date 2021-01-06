@@ -11,13 +11,7 @@ const Dashboard = () => {
 
     const {
         currentUser,
-        newDeviceDetected
     } = useForm();
-
-    if(localStorage.getItem("newid") !== null || undefined){
-        var id = localStorage.getItem("newid")
-        newDeviceDetected(id)
-    }
 
 
     const logOut = () => {
