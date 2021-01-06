@@ -26,7 +26,7 @@ const Register = ({query}, props) => {
         console.log("redirect to login with id: " + query.id)
         return router.push('/?id=' + query.id)
     };
-
+    
     return (
         <div className="col-md-12">
             <div className="card card-container">
